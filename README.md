@@ -36,7 +36,7 @@ Protein variable is declared outside the for loop which will be appended with Am
 
 class Protein:     will return self.sequence
 
-#class Person:     will return self.mutant = mutant
+class Person:     will return self.mutant = mutant
         
 def compare_dna_sequence_deletion(self, wild_type, mutant):
 
