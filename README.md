@@ -34,18 +34,13 @@ codon_table = {'UUU': 'Phe', 'UUC': 'Phe', 'UUA': 'Leu', 'UUG': 'Leu', 'CUU': 'L
 
 #Protein variable is declared outside the for loop which will be appended with Amino Acids of corresponding codons
 
-#protein = []
-       
-              
-#there will be these two classes 
+
  
-#class Protein:
+#class Protein:     will return self.sequence
 
-#will return self.sequence
-
-#class Person:
-#will return self.mutant = mutant
+#class Person:     will return self.mutant = mutant
         
-  #def compare_dna_sequence_deletion(self, wild_type, mutant):
-#it will return "No deletion in DNA sequence"    or     return f"Deleted sequence: {deleted_seq}, at index: {nt}"
+def compare_dna_sequence_deletion(self, wild_type, mutant):
+
+it will return "No deletion in DNA sequence"    or     return f"Deleted sequence: {deleted_seq}, at index: {nt}"
 
