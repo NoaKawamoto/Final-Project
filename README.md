@@ -49,28 +49,3 @@ codon_table = {'UUU': 'Phe', 'UUC': 'Phe', 'UUA': 'Leu', 'UUG': 'Leu', 'CUU': 'L
   #def compare_dna_sequence_deletion(self, wild_type, mutant):
 #it will return "No deletion in DNA sequence"    or     return f"Deleted sequence: {deleted_seq}, at index: {nt}"
 
-#there will be the following inputs 
-#wild_type_seq = input("Enter wild-type DNA sequence (5' to 3'): ")
-#mutant_seq = input("Enter mutated DNA sequence (5' to 3'): ")
-
-#the following will be difined and printed 
-
-#print("\n=== DNA Sequence Comparison ===")
-
-#print("Wild-Type DNA: ", wild_type_seq)
-
-#print("Mutant DNA:    ", mutant_seq)
-
-#print(deletion_result)
-
-#mutant_dna = DNA(mutant_seq)
-
-#mutant_mrna = mutant_dna.transcription()
-
-#mutant_protein = mutant_mrna.translation()
-
-#print("\n=== Transcription and Translation ===")
-
-#print("mRNA:          ", mutant_mrna.seq)
-
-#print("Protein:       ", mutant_protein if mutant_protein else "No protein translated")
