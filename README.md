@@ -54,13 +54,23 @@
 #mutant_seq = input("Enter mutated DNA sequence (5' to 3'): ")
 
 #the following will be difined and printed 
+
 #print("\n=== DNA Sequence Comparison ===")
+
 #print("Wild-Type DNA: ", wild_type_seq)
+
 #print("Mutant DNA:    ", mutant_seq)
+
 #print(deletion_result)
+
 #mutant_dna = DNA(mutant_seq)
+
 #mutant_mrna = mutant_dna.transcription()
+
 #mutant_protein = mutant_mrna.translation()
+
 #print("\n=== Transcription and Translation ===")
+
 #print("mRNA:          ", mutant_mrna.seq)
+
 #print("Protein:       ", mutant_protein if mutant_protein else "No protein translated")
