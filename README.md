@@ -30,13 +30,11 @@ codon_table = {'UUU': 'Phe', 'UUC': 'Phe', 'UUA': 'Leu', 'UUG': 'Leu', 'CUU': 'L
 'AGA': 'Arg', 'AGG': 'Arg', 'GGU': 'Gly', 'GGC': 'Gly', 'GGA': 'Gly',
 'GGG': 'Gly', 'UAA': 'Stop', 'UAG': 'Stop', 'UGA': 'Stop'}
 
-#initializes the creation of MRNA object
+initializes the creation of MRNA object
 
-#Protein variable is declared outside the for loop which will be appended with Amino Acids of corresponding codons
+Protein variable is declared outside the for loop which will be appended with Amino Acids of corresponding codons
 
-
- 
-#class Protein:     will return self.sequence
+class Protein:     will return self.sequence
 
 #class Person:     will return self.mutant = mutant
         
