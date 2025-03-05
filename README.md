@@ -1,15 +1,21 @@
 #DNA class
+
 #initializes the creation of the DNA sequence object
+
 #ensures that the DNA sequence is in uppercase
 
 #def transcription(self):
+
 #converts DNA sequence to complementary mRNA strand (transcription
+
 #try and except block will be used to catch possible errors in inputting sequences that are invalid
+
 #it will contain complementary = {'A': 'U', 'T': 'A', 'C': 'G', 'G': 'C'}
         
 
 #class MRNA
 #will contain the dictionary of key-value pairs of codon sequence and the amino acid the codon corresponds to
+
 #codon_table = {'UUU': 'Phe', 'UUC': 'Phe', 'UUA': 'Leu', 'UUG': 'Leu', 'CUU': 'Leu',
  #'CUC': 'Leu', 'CUA': 'Leu', 'CUG': 'Leu', 'AUU': 'Ile', 'AUC': 'Ile',
    #'AUA': 'Ile', 'GUU': 'Val', 'GUC': 'Val', 'GUA': 'Val', 'GUG': 'Val',
@@ -25,11 +31,14 @@
 #'GGG': 'Gly', 'UAA': 'Stop', 'UAG': 'Stop', 'UGA': 'Stop'}
 
 #initializes the creation of MRNA object
+
 #Protein variable is declared outside the for loop which will be appended with Amino Acids of corresponding codons
+
 #protein = []
        
               
- #there will be these two classes 
+#there will be these two classes 
+ 
 #class Protein:
 
 #will return self.sequence
@@ -44,7 +53,7 @@
 #wild_type_seq = input("Enter wild-type DNA sequence (5' to 3'): ")
 #mutant_seq = input("Enter mutated DNA sequence (5' to 3'): ")
 
-#the follwoing will be difined and printed 
+#the following will be difined and printed 
 #print("\n=== DNA Sequence Comparison ===")
 #print("Wild-Type DNA: ", wild_type_seq)
 #print("Mutant DNA:    ", mutant_seq)
