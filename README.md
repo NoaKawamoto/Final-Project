@@ -43,6 +43,7 @@ def compare_dna_sequence_deletion(self, wild_type, mutant):
 it will return "No deletion in DNA sequence"    or     return f"Deleted sequence: {deleted_seq}, at index: {nt}"
 
 these are going to be the print statements used.
+
 print("\n=== DNA Sequence Comparison ===")
 
 print("Wild-Type DNA: ", wild_type_seq)
