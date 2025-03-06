@@ -95,7 +95,7 @@ class Person:
 
         # Extract deleted sequence
         deleted_seq = wild_type[nt: len_wt - (len_mut - nt)]
-        return f"Deleted sequence: {deleted_seq}, at index: {nt}"
+        return f"Deleted sequence: {deleted_seq}, at base pair: {nt}"
 
 wild_type_seq = input("Enter wild-type DNA sequence (5' to 3'): ").strip().upper()
 mutant_seq = input("Enter mutated DNA sequence (5' to 3'): ").strip().upper()
@@ -103,17 +103,19 @@ mutant_seq = input("Enter mutated DNA sequence (5' to 3'): ").strip().upper()
 person = Person(wild_type_seq, mutant_seq)
 deletion_result = person.compare_dna_sequence_deletion(wild_type_seq, mutant_seq)
 
-print("\n=== DNA Sequence Comparison ===")
+print("\n--- DNA Sequence Comparison ---")
 print("Wild-Type DNA: ", wild_type_seq)
-print("Mutant DNA:    ", mutant_seq)
+print("Mutant DNA: ", mutant_seq)
 print(deletion_result)
+
+#protein
 
 mutant_dna = DNA(mutant_seq)
 mutant_mrna = mutant_dna.transcription()
 mutant_protein = mutant_mrna.translation()
 
-print("\n=== Transcription and Translation ===")
-print("mRNA:          ", mutant_mrna.seq)
-print("Protein:       ", mutant_protein if mutant_protein else "No protein translated")
+print("\n--- Transcription and Translation ---")
+print("mRNA: ", mutant_mrna.seq)
+print("Protein: ", mutant_protein if mutant_protein else "No protein translated")
 
 
