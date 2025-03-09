@@ -1,143 +1,188 @@
 class DNA:
-#initializes the creation of the DNA sequence object
-#ensures that the DNA sequence is in uppercase
-
     def __init__(self, seq):
         self.seq = seq.upper()
-
-#converts DNA sequence to complementary mRNA strand (transcription
-#try and except block to catch possible errors in inputting sequences that are invalid
 
     def transcription(self):
         complementary = {'A': 'U', 'T': 'A', 'C': 'G', 'G': 'C'}
         try:
             mRNA_seq = ''.join(complementary[base] for base in self.seq)
             return MRNA(mRNA_seq)
-        except KeyError as e:
-            print('DNA sequence is invalid. Incorrect bases. Try again.', e)
+        except KeyError:
+            print("Invalid DNA sequence: does not code for AA")
+        except ValueError:
+            print("Invalid DNA sequence: contains invalid base.")  # Invalid base in the sequence
+        except Exception as e:
+            raise Exception(f"An error occurred during transcription: {str(e)}")
+
 
 class MRNA:
-
-#dictionary of key-value pairs of codon sequence and the amino acid the codon corresponds to
-
-    codon_table = {'UUU': 'Phe', 'UUC': 'Phe', 'UUA': 'Leu', 'UUG': 'Leu', 'CUU': 'Leu',
-                   'CUC': 'Leu', 'CUA': 'Leu', 'CUG': 'Leu', 'AUU': 'Ile', 'AUC': 'Ile',
-                   'AUA': 'Ile', 'GUU': 'Val', 'GUC': 'Val', 'GUA': 'Val', 'GUG': 'Val',
-                   'UCU': 'Ser', 'UCC': 'Ser', 'UCA': 'Ser', 'UCG': 'Ser', 'AUG': 'Met',
-                   'AGU': 'Ser', 'AGC': 'Ser', 'CCU': 'Pro', 'CCC': 'Pro', 'CCA': 'Pro',
-                   'CCG': 'Pro', 'ACU': 'Thr', 'ACC': 'Thr', 'ACA': 'Thr', 'ACG': 'Thr',
-                   'GCU': 'Ala', 'GCC': 'Ala', 'GCA': 'Ala', 'GCG': 'Ala', 'UAU': 'Tyr',
-                   'UAC': 'Tyr', 'CAU': 'His', 'CAC': 'His', 'CAA': 'Gln', 'CAG': 'Gln',
-                   'AAU': 'Asn', 'AAC': 'Asn', 'AAA': 'Lys', 'AAG': 'Lys', 'GAU': 'Asp',
-                   'GAC': 'Asp', 'GAA': 'Glu', 'GAG': 'Glu', 'UGU': 'Cys', 'UGC': 'Cys',
-                   'UGG': 'Trp', 'CGU': 'Arg', 'CGC': 'Arg', 'CGA': 'Arg', 'CGG': 'Arg',
-                   'AGA': 'Arg', 'AGG': 'Arg', 'GGU': 'Gly', 'GGC': 'Gly', 'GGA': 'Gly',
-                   'GGG': 'Gly', 'UAA': 'Stop', 'UAG': 'Stop', 'UGA': 'Stop'}
-
-#initializes the creation of MRNA object
+    codon_table = {
+        'UUU': 'Phe', 'UUC': 'Phe', 'UUA': 'Leu', 'UUG': 'Leu', 'CUU': 'Leu', 'CUC': 'Leu', 'CUA': 'Leu', 'CUG': 'Leu',
+        'AUU': 'Ile', 'AUC': 'Ile', 'AUA': 'Ile', 'AUG': 'Met', 'GUU': 'Val', 'GUC': 'Val', 'GUA': 'Val', 'GUG': 'Val',
+        'UCU': 'Ser', 'UCC': 'Ser', 'UCA': 'Ser', 'UCG': 'Ser', 'AGU': 'Ser', 'AGC': 'Ser', 'CCU': 'Pro', 'CCC': 'Pro',
+        'CCA': 'Pro', 'CCG': 'Pro', 'ACU': 'Thr', 'ACC': 'Thr', 'ACA': 'Thr', 'ACG': 'Thr', 'GCU': 'Ala', 'GCC': 'Ala',
+        'GCA': 'Ala', 'GCG': 'Ala', 'UAU': 'Tyr', 'UAC': 'Tyr', 'CAU': 'His', 'CAC': 'His', 'CAA': 'Gln', 'CAG': 'Gln',
+        'AAU': 'Asn', 'AAC': 'Asn', 'AAA': 'Lys', 'AAG': 'Lys', 'GAU': 'Asp', 'GAC': 'Asp', 'GAA': 'Glu', 'GAG': 'Glu',
+        'UGU': 'Cys', 'UGC': 'Cys', 'UGG': 'Trp', 'CGU': 'Arg', 'CGC': 'Arg', 'CGA': 'Arg', 'CGG': 'Arg', 'AGA': 'Arg',
+        'AGG': 'Arg', 'GGU': 'Gly', 'GGC': 'Gly', 'GGA': 'Gly', 'GGG': 'Gly', 'UAA': 'Stop', 'UAG': 'Stop',
+        'UGA': 'Stop'
+    }
 
     def __init__(self, seq):
         self.seq = seq
 
-#Protein variable is declared outside the for loop which will be appended with Amino Acids of corresponding codons
-#seq[r:r+3] goes over sequence of codons in increments of 3 (2 values after r)
     def translation(self):
-        protein = []
-        start_index = -1  # To track the start codon position
+        proteins = []
+        for start_index in range(len(self.seq) - 2):
+            if self.seq[start_index:start_index + 3] == "AUG":
+                protein = []
+                for base in range(start_index, len(self.seq) - 2, 3):
+                    codon = self.seq[base:base + 3]
+                    amino_acid = self.codon_table.get(codon, '')
 
-        # Step 1: Find the first "AUG" (start codon)
-        for i in range(len(self.seq) - 2):
-            if self.seq[i:i + 3] == "AUG":
-                start_index = i
-                break
+                    if amino_acid == "Stop":
+                        break  # Stop translation if a stop codon is reached
+                    if amino_acid:
+                        protein.append(amino_acid)
 
-                # If no start codon is found, return an invalid sequence message
-        if start_index == -1:
-            return "Invalid Sequence (No Start Codon)"
+                if protein:
+                    proteins.append("-".join(protein))
 
-        # Step 2: Process codons from the start codon in steps of 3
-        for base in range(start_index, len(self.seq) - 2, 3):
-            codon = self.seq[base:base + 3]
-            amino_acid = self.codon_table.get(codon, '')
+        return proteins if proteins else ["No valid proteins translated"]
 
-            if amino_acid == "Stop":
-                break  # Stop translation if a stop codon is reached
-
-            if amino_acid:
-                protein.append(amino_acid)  # Add amino acid to protein chain
-
-        return Protein("-".join(protein)) if protein else "Invalid Sequence"
-
-class Protein:
-    def __init__(self, sequence):
-        self.sequence = sequence
-    def __str__(self):
-        return self.sequence
 
 class Person:
     def __init__(self, wild_type, mutant):
         self.wild_type = wild_type
         self.mutant = mutant
 
+    def check_frameshift(self):
+        difference = abs(len(self.wild_type) - len(self.mutant))
+        if difference == 0:
+            return "No mutation detected."
+        if difference % 3 == 0:
+            return "No frameshift detected (mutation is in-frame)."
+        return "Frameshift mutation detected!"
+
     def compare_dna_sequence_insertion(self):
-        """Checks if there is an inserted sequence in the mutant DNA."""
-        len_wt = len(self.wild_type)
-        len_mut = len(self.mutant)
+        if len(self.mutant) <= len(self.wild_type):
+            return "No insertion detected"
 
-        if len_wt == len_mut:
-            return "No insertion in DNA sequence"
+        for i in range(len(self.wild_type)):
+            if i >= len(self.mutant) or self.wild_type[i] != self.mutant[i]:
+                inserted_seq = self.mutant[i:len(self.mutant) - (len(self.wild_type) - i)]
+                return f"Inserted nucleotides: {inserted_seq} at nt {i+1}"
 
-        if len_mut < len_wt:
-            return "Mutation is not an insertion (possibly a deletion)."
+        return f"Insertion detected at the end of the sequence at nt {len(self.wild_type)+1}"
 
-        for nt in range(len(self.wild_type)):
-            if self.wild_type[nt] != self.mutant[nt]:
-                break
+    def compare_dna_sequence_deletion(self):
+        if len(self.wild_type) <= len(self.mutant):
+            return "No deletion detected"
+
+        for i in range(len(self.mutant)):
+            if i >= len(self.wild_type) or self.wild_type[i] != self.mutant[i]:
+                deleted_seq = self.wild_type[i:len(self.wild_type) - (len(self.mutant) - i)]
+                return f"Deleted nucleotides: {deleted_seq} at nt {i+1}"
+
+        return f"Deletion detected at the end of the sequence at nt {len(self.mutant)+1}"
+
+    def detect_mutation_type(self):
+        # First, check for a frameshift mutation
+        frameshift_result = self.check_frameshift()
+        if "Frameshift mutation detected" in frameshift_result:
+            return "Frameshift mutation detected. Point mutation is not possible."
+
+        wt_mrna = DNA(self.wild_type).transcription()
+        mut_mrna = DNA(self.mutant).transcription()
+        if not wt_mrna or not mut_mrna:
+            return "Invalid DNA sequence."
+
+        wt_protein = wt_mrna.translation()
+        mut_protein = mut_mrna.translation()
+
+        if wt_protein == mut_protein:
+            return "No change in protein sequence"
+
+        return "Missense mutation (amino acid change detected)."
+
+    def get_all_proteins(self):
+        wt_mrna = DNA(self.wild_type).transcription()
+        mt_mrna = DNA(self.mutant).transcription()
+        if not wt_mrna or not mt_mrna:
+            return "Invalid DNA sequence."
+
+        return wt_mrna.translation(), mt_mrna.translation()
+
+
+def read_input_file(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            wild_type_seq = file.readline().strip()
+            mutant_seq = file.readline().strip()
+        return wild_type_seq, mutant_seq
+    except FileNotFoundError:
+        raise Exception(f"File {file_path} not found.")
+    except Exception as e:
+        raise Exception(f"Error reading file {file_path}: {str(e)}")
+
+
+def write_output_file(file_path, content):
+    try:
+        with open(file_path, 'w') as file:
+            file.write(content)
+    except Exception as e:
+        raise Exception(f"Error writing to file {file_path}: {str(e)}")
+
+
+# Main program
+def main():
+    try:
+        # Read from input file
+        wild_type_seq, mutant_seq = read_input_file('DNA_sample.txt')
+
+        # Create Person object
+        person = Person(wild_type_seq, mutant_seq)
+
+        # Mutation analysis
+        mutation_analysis = "\n--- Mutation Analysis ---\n"
+        mutation_analysis += person.check_frameshift() + "\n"
+        mutation_analysis += person.detect_mutation_type() + "\n"
+
+        # DNA Sequence Comparison
+        dna_comparison = "\n--- DNA Sequence Comparison ---\n"
+        dna_comparison += f"Wild-Type DNA: {wild_type_seq}\n"
+        dna_comparison += f"Mutant DNA: {mutant_seq}\n"
+        dna_comparison += person.compare_dna_sequence_deletion() + "\n"
+        dna_comparison += person.compare_dna_sequence_insertion() + "\n"
+
+        # Transcription and Translation
+        mutant_dna = DNA(mutant_seq)
+        mutant_mrna = mutant_dna.transcription()
+        transcription_translation = "\n--- Transcription and Translation ---\n"
+        if mutant_mrna:
+            mutant_protein = mutant_mrna.translation()
+            transcription_translation += f"mRNA: {mutant_mrna.seq}\n"
+            transcription_translation += f"Protein: {mutant_protein}\n"
         else:
-            nt = len(self.wild_type)  # If loop completes, insertion is at the end
+            transcription_translation += "Invalid DNA sequence detected. Transcription failed.\n"
 
-        # Extract inserted sequence
-        inserted_seq = self.mutant[nt: len_mut - (len_wt - nt)]
-        return f"Inserted sequence: {inserted_seq}, at base pair: {nt}"
+        # Protein Comparison
+        wt_proteins, mt_proteins = person.get_all_proteins()
+        protein_comparison = "\n--- Protein Comparison ---\n"
+        protein_comparison += f"Wild-Type Proteins: {wt_proteins}\n"
+        protein_comparison += f"Mutant Proteins:   {mt_proteins}\n"
 
-    def compare_dna_sequence_deletion(self, wild_type, mutant):
-        self.wild_type = wild_type
-        self.mutant = mutant
-        len_wt = len(wild_type)
-        len_mut = len(mutant)
-        if len_wt == len_mut:
-            return "No deletion in DNA sequence"
+        # Combine all content
+        full_content = mutation_analysis + dna_comparison + transcription_translation + protein_comparison
 
-        for nt in range(len(mutant)):
-            if wild_type[nt] != mutant[nt]:
-                break
-        else:
-            nt = len(mutant)  # If loop completes, deletion is at the end
+        # Write results to output file
+        write_output_file('output.txt', full_content)
+        print("Results have been written to 'output.txt'.")
 
-        # Extract deleted sequence
-        deleted_seq = wild_type[nt: len_wt - (len_mut - nt)]
-        return f"Deleted sequence: {deleted_seq}, at base pair: {nt}"
+    except Exception as e:
+        print(f"Error: {e}")
 
-wild_type_seq = input("Enter wild-type DNA sequence (5' to 3'): ").strip().upper()
-mutant_seq = input("Enter mutated DNA sequence (5' to 3'): ").strip().upper()
 
-person = Person(wild_type_seq, mutant_seq)
-deletion_result = person.compare_dna_sequence_deletion(wild_type_seq, mutant_seq)
-
-print("\n--- DNA Sequence Comparison ---")
-print("Wild-Type DNA: ", wild_type_seq)
-print("Mutant DNA: ", mutant_seq)
-print(deletion_result)
-
-insertion_result = person.compare_dna_sequence_insertion()
-print(insertion_result)
-
-#protein
-
-mutant_dna = DNA(mutant_seq)
-mutant_mrna = mutant_dna.transcription()
-mutant_protein = mutant_mrna.translation()
-
-print("\n--- Transcription and Translation ---")
-print("mRNA: ", mutant_mrna.seq)
-print("Protein: ", mutant_protein if mutant_protein else "No protein translated")
+# Run the program
+if __name__ == "__main__":
+    main()
