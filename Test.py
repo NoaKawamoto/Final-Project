@@ -6,9 +6,9 @@ class TestMutationAnalysis(unittest.TestCase):
 
     def test_frameshift_detection_1(self):
         wild_type_1 = "ATGCGTA"
-        mutant_1 = "ATGCG"
+        mutant_1 = "ATGC"
         person_1 = Person(wild_type_1, mutant_1)
-        self.assertEqual(person_1.check_frameshift(), "Frameshift mutation detected!")
+        self.assertEqual(person_1.check_frameshift(), "Mutation detected but is in-frame")
 
     def test_frameshift_detection_2(self):
         wild_type_2 = "ATGCGTA"
