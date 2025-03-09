@@ -137,6 +137,11 @@ if __name__ == "__main__":
         person = Person(wild_type_seq, mutant_seq)
 
         results = [
+            "\n------ DNA Sequence Comparison ---",
+            f"Wild-Type DNA: {wild_type_seq}",
+            f"Mutant DNA: {mutant_seq}",
+            person.compare_dna_sequence_deletion(),
+            person.compare_dna_sequence_insertion(),
             "\n--- Mutation Analysis ---",
             person.check_frameshift(),
             person.detect_mutation_type(),
