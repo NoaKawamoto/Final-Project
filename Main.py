@@ -79,6 +79,27 @@ class Person:
         self.wild_type = wild_type
         self.mutant = mutant
 
+    def compare_dna_sequence_insertion(self):
+        """Checks if there is an inserted sequence in the mutant DNA."""
+        len_wt = len(self.wild_type)
+        len_mut = len(self.mutant)
+
+        if len_wt == len_mut:
+            return "No insertion in DNA sequence"
+
+        if len_mut < len_wt:
+            return "Mutation is not an insertion (possibly a deletion)."
+
+        for nt in range(len(self.wild_type)):
+            if self.wild_type[nt] != self.mutant[nt]:
+                break
+        else:
+            nt = len(self.wild_type)  # If loop completes, insertion is at the end
+
+        # Extract inserted sequence
+        inserted_seq = self.mutant[nt: len_mut - (len_wt - nt)]
+        return f"Inserted sequence: {inserted_seq}, at base pair: {nt}"
+
     def compare_dna_sequence_deletion(self, wild_type, mutant):
         self.wild_type = wild_type
         self.mutant = mutant
@@ -108,6 +129,9 @@ print("Wild-Type DNA: ", wild_type_seq)
 print("Mutant DNA: ", mutant_seq)
 print(deletion_result)
 
+insertion_result = person.compare_dna_sequence_insertion()
+print(insertion_result)
+
 #protein
 
 mutant_dna = DNA(mutant_seq)
@@ -117,5 +141,3 @@ mutant_protein = mutant_mrna.translation()
 print("\n--- Transcription and Translation ---")
 print("mRNA: ", mutant_mrna.seq)
 print("Protein: ", mutant_protein if mutant_protein else "No protein translated")
-
-
