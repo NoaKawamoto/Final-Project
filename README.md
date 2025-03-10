@@ -42,3 +42,23 @@ Functions:
   - output: index where mutations are located and the deleted/inserted DNA strand and what the protein the strand was supposed to code for
 
 
+
+
+
+
+
+
+
+
+Who did what:
+Noa- 
+File Handling
+Class MRNA
+Class Person-  def check_frameshift(self),  def compare_dna_sequence_insertion(self):,  def get_all_proteins(self):
+
+Ryan-
+Testing
+Class DNA
+Class Person- def compare_dna_sequence_deletion(self):, def detect_mutation_type(self):
+
+Both of us worked on the output print statements
