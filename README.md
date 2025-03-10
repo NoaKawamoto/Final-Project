@@ -51,14 +51,14 @@ Functions:
 
 
 Who did what:
-Noa- 
-File Handling
-Class MRNA
-Class Person-  def check_frameshift(self),  def compare_dna_sequence_insertion(self):,  def get_all_proteins(self):
+  Noa- 
+  File Handling
+  Class MRNA
+  Class Person-  def check_frameshift(self),  def compare_dna_sequence_insertion(self):,  def get_all_proteins(self):
 
-Ryan-
-Testing
-Class DNA
-Class Person- def compare_dna_sequence_deletion(self):, def detect_mutation_type(self):
+  Ryan-
+  Testing
+  Class DNA
+  Class Person- def compare_dna_sequence_deletion(self):, def detect_mutation_type(self):
 
-Both of us worked on the output print statements
+  Both of us worked on the output print statements
