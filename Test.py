@@ -8,7 +8,7 @@ class TestMutationAnalysis(unittest.TestCase):
         wild_type_1 = "ATGCGTA"
         mutant_1 = "ATGC"
         person_1 = Person(wild_type_1, mutant_1)
-        self.assertEqual(person_1.check_frameshift(), "No frameshift detected (mutation is in-frame)")
+        self.assertEqual(person_1.check_frameshift(), "No frameshift detected (mutation is in-frame).")
 
     def test_frameshift_detection_2(self):
         wild_type_2 = "ATGCGTA"
@@ -50,7 +50,7 @@ class TestMutationAnalysis(unittest.TestCase):
         wild_type_8 = "TACCTG"
         mutant_8 = "TACCTA"
         person_8 = Person(wild_type_8, mutant_8)
-        self.assertEqual(person_8.detect_mutation_type(), "No change in protein sequence.")
+        self.assertEqual(person_8.detect_mutation_type(), "No change in protein sequence")
 
     def test_no_mutation_detected(self):
         """Test case with no mutation"""
@@ -58,7 +58,7 @@ class TestMutationAnalysis(unittest.TestCase):
         mutant_4 = "ATGCGTAC"
         person_4 = Person(wild_type_4, mutant_4)
         self.assertEqual(person_4.check_frameshift(), "No mutation detected.")
-        self.assertEqual(person_4.detect_mutation_type(), "No change in protein sequence.")
+        self.assertEqual(person_4.detect_mutation_type(), "No change in protein sequence")
 
     def test_no_mutation_detected_2(self):
         """Test case with no mutation"""
@@ -66,7 +66,7 @@ class TestMutationAnalysis(unittest.TestCase):
         mutant_4 = "TAGTGAAAAAAA"
         person_4 = Person(wild_type_4, mutant_4)
         self.assertEqual(person_4.check_frameshift(), "No mutation detected.")
-        self.assertEqual(person_4.detect_mutation_type(), "No change in protein sequence.")
+        self.assertEqual(person_4.detect_mutation_type(), "No change in protein sequence")
 
     def test_transcription_and_translation(self):
         wild_type_dna = DNA("TACTGCCCCCCC")
