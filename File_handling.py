@@ -129,16 +129,14 @@ if __name__ == "__main__":
         person = Person(wild_type_seq, mutant_seq)
         protein_changes = person.compare_proteins()
 
-        results = [
-            "\n------ DNA Sequence Comparison ------\n",
-            f"Wild-Type DNA: {wild_type_seq}\n",
-            f"Mutant DNA: {mutant_seq}\n",
-            "\n------ Protein Comparison ------\n",
-            "Wild-Type Proteins:\n" + "\n".join(person.get_all_proteins()[0]),
-            "\nMutant Proteins:\n" + "\n".join(person.get_all_proteins()[1]),
-            "\n------ Mutated Proteins ------\n",
-            "\n".join(protein_changes),
-        ]
+        results = ["\n------ DNA Sequence Comparison ------\n",
+                   f"Wild-Type DNA: {wild_type_seq}\n",
+                   f"Mutant DNA: {mutant_seq}\n",
+                   "\n------ Protein Comparison ------\n",
+                   "Wild-Type Proteins:\n" + "\n".join(person.get_all_proteins()[0]),
+                   "\nMutant Proteins:\n" + "\n".join(person.get_all_proteins()[1]),
+                   "\n------ Mutated Proteins ------\n",
+                   "\n".join(protein_changes),]
 
         write_results_to_file(output_file, results)
 
