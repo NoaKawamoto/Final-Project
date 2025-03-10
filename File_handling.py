@@ -66,7 +66,7 @@ class Person:
     def compare_proteins(self):
         # Purpose: Compares wild-type and mutant proteins and marks mutations.
         # Input: uses self.wild_type and self.mutant
-        # Output: List of strings describing protein differences
+        # Output: List of strings describing protein differences#
         wt_proteins, mt_proteins = self.get_all_proteins()
         max_len = max(len(wt_proteins), len(mt_proteins))
 
