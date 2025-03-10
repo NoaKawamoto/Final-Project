@@ -1,11 +1,9 @@
 # Class representing a DNA sequence and its transcription process
 class DNA:
     def __init__(self, seq: str):
-        """Initializes the DNA sequence and converts it to uppercase."""
         self.seq = seq.upper()
 
     def transcription(self):
-        """Transcribes the DNA sequence into an mRNA sequence."""
         complementary = {'A': 'U', 'T': 'A', 'C': 'G', 'G': 'C'}
         try:
             mRNA_seq = ''.join(complementary[base] for base in self.seq)
@@ -28,11 +26,9 @@ class MRNA:
     }
 
     def __init__(self, seq: str):
-        """Initializes an mRNA sequence."""
         self.seq = seq
 
     def translation(self):
-        """Translates the mRNA sequence into a protein sequence."""
         proteins = []
         for i in range(len(self.seq) - 2):
             if self.seq[i:i+3] == "AUG":
@@ -50,13 +46,17 @@ class MRNA:
 
 
 class Person:
+    # Purpose: Initializes a person object with wild-type and mutant DNA sequences.
+    # Input: wild_type (type string) - Wild-type DNA sequence
+    #        mutant (type string) - Mutant DNA sequence
     def __init__(self, wild_type: str, mutant: str):
-        """Initializes a person object with wild-type and mutant DNA sequences."""
         self.wild_type = wild_type
         self.mutant = mutant
 
     def get_all_proteins(self):
-        """Translates both wild-type and mutant DNA to proteins."""
+        # Purpose: Translates both wild-type and mutant DNA to proteins.
+        # Input: uses self.wild_type and self.mutant
+        # Output: Tuple of two lists (wild-type proteins, mutant proteins)
         wt_mrna = DNA(self.wild_type).transcription()
         mt_mrna = DNA(self.mutant).transcription()
         if not wt_mrna or not mt_mrna:
@@ -64,7 +64,9 @@ class Person:
         return wt_mrna.translation(), mt_mrna.translation()
 
     def compare_proteins(self):
-        """Compares wild-type and mutant proteins and marks mutations."""
+        # Purpose: Compares wild-type and mutant proteins and marks mutations.
+        # Input: uses self.wild_type and self.mutant
+        # Output: List of strings describing protein differences
         wt_proteins, mt_proteins = self.get_all_proteins()
         max_len = max(len(wt_proteins), len(mt_proteins))
 
@@ -91,7 +93,9 @@ class Person:
 
 
 def read_sequences_from_file(filename: str):
-    """Reads wild-type and mutant DNA sequences from a given file."""
+    # Purpose: Reads wild-type and mutant DNA sequences from a given file.
+    # Input: filename (type string) in read mode
+    # Output: Tuple (wild-type DNA sequence, mutant DNA sequence) or (None, None) if file not found
     try:
         with open(filename, "r") as file:
             lines = file.readlines()
@@ -104,7 +108,9 @@ def read_sequences_from_file(filename: str):
 
 
 def write_results_to_file(filename: str, results: list[str]):
-    """Writes the mutation analysis results to a specified file."""
+    # Purpose: Writes the mutation analysis results to a specified file.
+    # Input: filename (str) - Name of the file to write results
+    # Output: None (writes results to file)
     try:
         with open(filename, "w") as file:
             file.writelines("\n".join(results))

@@ -16,7 +16,7 @@ class DNA:
             return MRNA(mRNA_seq)  # Return MRNA object with transcribed sequence
         except KeyError:
             print("Invalid DNA sequence: contains non-standard base(s).")
-            return None
+
 
 
 # Class representing an mRNA sequence and its translation to protein
