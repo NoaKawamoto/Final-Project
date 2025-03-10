@@ -1,5 +1,5 @@
 import unittest
-from Main import DNA, Person  # Import the main module
+from User_Input import DNA, Person  # Import the main module
 
 
 class TestMutationAnalysis(unittest.TestCase):
@@ -8,7 +8,7 @@ class TestMutationAnalysis(unittest.TestCase):
         wild_type_1 = "ATGCGTA"
         mutant_1 = "ATGC"
         person_1 = Person(wild_type_1, mutant_1)
-        self.assertEqual(person_1.check_frameshift(), "Mutation detected but is in-frame.")
+        self.assertEqual(person_1.check_frameshift(), "No frameshift detected (mutation is in-frame)")
 
     def test_frameshift_detection_2(self):
         wild_type_2 = "ATGCGTA"
@@ -26,13 +26,13 @@ class TestMutationAnalysis(unittest.TestCase):
         wild_type_4 = "ATGCGTA"
         mutant_4 = "ATGCGTAA"
         person_4 = Person(wild_type_4, mutant_4)
-        self.assertEqual(person_4.compare_dna_sequence_insertion(), "Insertion detected at the end of the sequence at nt 8")
+        self.assertEqual(person_4.compare_dna_sequence_insertion(), "Insertion detected at the end of the sequence at nucleotide 8")
 
     def test_deletion_detection(self):
         wild_type_5 = "ATGCGTA"
         mutant_5 = "ATCGTA"
         person_5 = Person(wild_type_5, mutant_5)
-        self.assertEqual(person_5.compare_dna_sequence_deletion(), "Deleted nucleotides: G at nt 3")
+        self.assertEqual(person_5.compare_dna_sequence_deletion(), "Deleted nucleotides: G at nucleotide 3")
 
     def test_deletion_detection_2(self):
         wild_type_6 = "ATGCGTA"
