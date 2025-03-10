@@ -95,6 +95,9 @@ class Person:
         return f"Insertion detected at the end of the sequence at nucleotide {len(self.wild_type)+1}"
 
     def compare_dna_sequence_deletion(self):
+        # purpose: Identifies and returns the deleted nucleotides in the mutant sequence compared to the wild-type sequence.
+        # input: self.wild_type (wild type DNA and self.mutant (mutant DNA)
+        # output: A string describing the deleted nucleotides and their position in the sequence.
         if len(self.wild_type) <= len(self.mutant):
             return "No deletion detected"
 
@@ -106,6 +109,10 @@ class Person:
         return f"Deletion detected at the end of the sequence at nucleotide {len(self.mutant)+1}"
 
     def detect_mutation_type(self):
+        # purpose: Determines the type of mutation present (frameshift, missense, or nonsense).
+        # input: self.wild_type (wild-type DNA sequence), self.mutant (mutant DNA sequence)
+        # output: A string describing the type of mutation detected.
+
         frameshift_result = self.check_frameshift()
         if "Frameshift mutation detected" in frameshift_result:
             return "Frameshift mutation detected. Point mutation is not possible."
